@@ -1,7 +1,8 @@
 package com.mikeapp.sportshub.data
 
 import com.mikeapp.sportshub.BuildConfig
-import com.mikeapp.sportshub.data.epsn.EspnApiService
+import com.mikeapp.sportshub.data.epsn.nba.EspnNbaApiService
+import com.mikeapp.sportshub.data.epsn.nfl.EspnNflApiService
 import com.mikeapp.sportshub.data.github.GithubApiService
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -41,5 +42,7 @@ object NetworkModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val espnApiService = retrofitEspn.create(EspnApiService::class.java)
+    val espnNbaApiService = retrofitEspn.create(EspnNbaApiService::class.java)
+
+    val espnNflApiService = retrofitEspn.create(EspnNflApiService::class.java)
 }

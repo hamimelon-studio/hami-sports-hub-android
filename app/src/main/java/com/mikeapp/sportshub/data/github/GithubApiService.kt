@@ -17,14 +17,14 @@ interface GithubApiService {
     suspend fun createFile(
         @Path("path")path: String,
         @Body requestBody: GitHubFileRequest
-    ): Response<String>
+    ): Response<GithubFileMetadata>
 
     // sha must be provided for updating existing file
     @PUT("repos/$owner/$repo/contents/{path}")
     suspend fun updateFile(
         @Path("path")path: String,
         @Body requestBody: GitHubFileRequest
-    ): Response<String>
+    ): Response<GithubFileMetadata>
 
     // get 404 if file isn't exist
     // get 200 and its metadata if exist

@@ -13,7 +13,7 @@ class GithubOpenApiRepository {
         CoroutineScope(Dispatchers.IO).launch {
 //            readContentInSingleCall("todoroot/test1.txt")
 //            getExistFileMeta()
-            createFileInSingleCall(
+            createNewFile(
                 "todoroot/test2.txt",
                 "121212good test string input good new changes!!!",
                 "test commit hahaha commit#2",
@@ -57,7 +57,7 @@ class GithubOpenApiRepository {
         return null
     }
 
-    private suspend fun createFileInSingleCall(
+    suspend fun createNewFile(
         path: String,
         fileContent: String,
         commitMessage: String
@@ -90,17 +90,15 @@ class GithubOpenApiRepository {
         }
     }
 
-    private suspend fun createFileOnGitHub(
+    suspend fun createOrForceUpdateFile(
         path: String,
         fileContent: String,
         commitMessage: String
     ) {
         val fileMetadataResponse = githubApiService.getFileMetadata(path)
-        Log.d("bbbb", "fileMetadataResponse: $fileMetadataResponse")
         if (fileMetadataResponse.isSuccessful || fileMetadataResponse.code() == 404) {
             val currentSha = if (fileMetadataResponse.isSuccessful) {
                 val fileMetadata = fileMetadataResponse.body()
-                Log.d("bbbb", "fileMetadata body: $fileMetadata")
 
                 // Ensure we have the current SHA
                 fileMetadata?.sha ?: throw IllegalStateException("File SHA not found")
@@ -118,20 +116,19 @@ class GithubOpenApiRepository {
                 content = encodedContent,
                 sha = currentSha
             )
-6
+
             // Make the API call to create the file
             val response = githubApiService.updateFile(path, createFileRequest)
 
             if (response.isSuccessful) {
                 // File created successfully
                 val fileContent = response.body()
-                Log.d("GitHub API", "File created successfully: $fileContent")
             } else {
                 // Handle errors
-                Log.e("GitHub API", "Error creating file: ${response.code()}")
+                Log.e("bbbb", "Error creating file: ${response.code()}")
 
                 val errorBody = response.errorBody()?.string()
-                Log.e("GitHub API", "Error creating file: ${response.code()}, $errorBody")
+                Log.e("bbbb", "Error creating file: ${response.code()}, $errorBody")
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.mikeapp.sportshub.data.github
 
 object RepoConfig {
-    const val owner = "hongwei-bai"
-    const val repo = "inhouse-git-todo-api"
+    const val owner = "hamimelon-studio"
+    const val repo = "hami-sports-api"
 }

@@ -1,15 +1,10 @@
-package com.mikeapp.sportshub.data.epsn.model
+package com.mikeapp.sportshub.data.epsn.nba.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TeamScheduleQuery(
+data class NbaTeamScheduleQuery(
     val dataVersion: Long,
-    val teamSchedule: TeamSchedule
-)
-
-@Serializable
-data class TeamSchedule(
     val teamSchedule: List<Season>
 )
 
