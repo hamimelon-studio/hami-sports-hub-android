@@ -9,7 +9,7 @@ class NflHubUseCase(
     private val githubRepository: GithubOpenApiRepository
 ) {
     suspend fun queryOnce() {
-        val teamSchedule = repository.queryNba()
+        val teamSchedule = repository.queryNfl()
         teamSchedule?.let {
             val gson = Gson()
             val jsonString = gson.toJson(teamSchedule)
