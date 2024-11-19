@@ -12,17 +12,17 @@ class GithubOpenApiRepository {
     fun test() {
         CoroutineScope(Dispatchers.IO).launch {
 //            readContentInSingleCall("todoroot/test1.txt")
-//            getExistFileMeta()
-            createNewFile(
-                "todoroot/test2.txt",
-                "121212good test string input good new changes!!!",
-                "test commit hahaha commit#2",
-            )
+            getFileMeta()
+//            createNewFile(
+//                "todoroot/test2.txt",
+//                "121212good test string input good new changes!!!",
+//                "test commit hahaha commit#2",
+//            )
         }
     }
 
     private suspend fun getFileMeta() {
-        val response = githubApiService.getFileMetadata("todoroot/test1.txt")
+        val response = githubApiService.getFileMetadata("nba/gs.json")
         Log.d("bbbb", "response.code: ${response.code()}")
 
         if (response.isSuccessful && response.body() != null) {
